@@ -1,5 +1,7 @@
 # Forgex Media Website - Asset & Customization Guide
 
+🔗 **Live Website URL:** [https://amalmajeed-cyper.github.io](https://amalmajeed-cyper.github.io)
+
 Welcome to the Forgex Media website codebase! Below are the instructions on how to customize this website and upload your own high-quality photography and videography assets.
 
 ## Setting Up Your Portfolio Assets
