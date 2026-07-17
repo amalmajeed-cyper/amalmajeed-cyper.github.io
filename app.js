@@ -384,56 +384,60 @@ function initCSSReveals() {
 
 /* --- LOAD UPLOADED ASSETS --- */
 function loadUploadedAssets() {
-  const assets = JSON.parse(localStorage.getItem('forgex_uploaded_assets') || '[]');
-  if (assets.length === 0) return;
+  try {
+    const assets = JSON.parse(localStorage.getItem('forgex_uploaded_assets') || '[]');
+    if (assets.length === 0) return;
 
-  const heroBg = document.querySelector('.hero-bg');
-  const portfolioGrid = document.querySelector('.portfolio-grid');
+    const heroBg = document.querySelector('.hero-bg');
+    const portfolioGrid = document.querySelector('.portfolio-grid');
 
-  // Sort oldest first so that when we prepend, the newest items end up at the very top
-  assets.sort((a, b) => a.timestamp - b.timestamp);
+    // Sort oldest first so that when we prepend, the newest items end up at the very top
+    assets.sort((a, b) => a.timestamp - b.timestamp);
 
-  assets.forEach(asset => {
-    if (asset.placement === 'hero' && heroBg) {
-      // Replace hero background
-      heroBg.src = asset.image;
-    } else if (asset.placement === 'portfolio' && portfolioGrid) {
-      // Prepend portfolio item card
-      const card = document.createElement('div');
-      card.className = 'portfolio-item';
-      
-      const isVideo = asset.category === 'videography';
-      if (isVideo) {
-        card.classList.add('video-item');
-        card.setAttribute('data-video', 'https://www.w3schools.com/html/mov_bbb.mp4'); // Fallback placeholder
-      }
-      
-      card.setAttribute('data-type', asset.category);
+    assets.forEach(asset => {
+      if (asset.placement === 'hero' && heroBg) {
+        // Replace hero background
+        heroBg.src = asset.image;
+      } else if (asset.placement === 'portfolio' && portfolioGrid) {
+        // Prepend portfolio item card
+        const card = document.createElement('div');
+        card.className = 'portfolio-item';
+        
+        const isVideo = asset.category === 'videography';
+        if (isVideo) {
+          card.classList.add('video-item');
+          card.setAttribute('data-video', 'https://www.w3schools.com/html/mov_bbb.mp4'); // Fallback placeholder
+        }
+        
+        card.setAttribute('data-type', asset.category);
 
-      let playOverlayHtml = '';
-      if (isVideo) {
-        playOverlayHtml = `
-          <div class="play-btn-overlay">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        let playOverlayHtml = '';
+        if (isVideo) {
+          playOverlayHtml = `
+            <div class="play-btn-overlay">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="portfolio-img-wrapper">
+            <img src="${asset.image}" alt="${escapeHtml(asset.title)}" class="portfolio-img">
+          </div>
+          ${playOverlayHtml}
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">${asset.category === 'photography' ? 'Photography' : 'Videography'}</span>
+            <h3 class="portfolio-title">${escapeHtml(asset.title)}</h3>
+            <p class="portfolio-desc">${escapeHtml(asset.description)}</p>
           </div>
         `;
+        
+        portfolioGrid.insertBefore(card, portfolioGrid.firstChild);
       }
-
-      card.innerHTML = `
-        <div class="portfolio-img-wrapper">
-          <img src="${asset.image}" alt="${escapeHtml(asset.title)}" class="portfolio-img">
-        </div>
-        ${playOverlayHtml}
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">${asset.category === 'photography' ? 'Photography' : 'Videography'}</span>
-          <h3 class="portfolio-title">${escapeHtml(asset.title)}</h3>
-          <p class="portfolio-desc">${escapeHtml(asset.description)}</p>
-        </div>
-      `;
-      
-      portfolioGrid.insertBefore(card, portfolioGrid.firstChild);
-    }
-  });
+    });
+  } catch (error) {
+    console.warn("Storage operations restricted or invalid JSON:", error);
+  }
 }
 
 function escapeHtml(text) {
