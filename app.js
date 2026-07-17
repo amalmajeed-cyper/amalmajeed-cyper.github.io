@@ -460,7 +460,8 @@ function initBurgerScroll() {
   for (let i = 1; i <= frameCount; i++) {
     const img = new Image();
     const paddedIndex = String(i).padStart(5, '0');
-    img.src = `assets/burger animation/${paddedIndex}.jpg`;
+    
+    // Bind handlers BEFORE setting src to handle cached images correctly
     img.onload = () => {
       loadedCount++;
       if (loaderText) {
@@ -470,12 +471,16 @@ function initBurgerScroll() {
         startBurgerAnimation();
       }
     };
+    
     img.onerror = () => {
       loadedCount++;
       if (loadedCount === frameCount) {
         startBurgerAnimation();
       }
     };
+    
+    // Set src after handlers are bound, using URL-escaped space
+    img.src = `assets/burger%20animation/${paddedIndex}.jpg`;
     burgerImages.push(img);
   }
 
