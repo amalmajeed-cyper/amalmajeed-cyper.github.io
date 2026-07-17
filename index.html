@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Forgex Media | Premium Restaurant Photography & Videography</title>
+  <meta name="description" content="Forgex Media captures the art of dining. High-end culinary photography and cinematic restaurant videography to elevate your brand. Book a shoot with us today.">
+  <meta name="keywords" content="restaurant photography, food videography, culinary media agency, restaurant marketing assets, gourmet photography, forgex media">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- FontAwesome for icons (optional but helpful for styling details) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-outline"></div>
+
+  <!-- Glassmorphic Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="nav-brand">
+      FORGEX<span>MEDIA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#process">Our Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a Shoot</a>
+    <button class="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+      <i class="fa-solid fa-bars-staggered"></i>
+    </button>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="hero">
+    <div class="hero-bg-wrapper">
+      <img src="assets/hero-bg.jpg" alt="Moody high-end restaurant interior ambiance" class="hero-bg">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="reveal"><span class="gradient-text">Capturing the Art</span><br>of Dining</h1>
+      <p class="hero-description reveal">Forgex Media creates premium, scroll-stopping photography and cinematic videography tailored specifically for restaurants and food brands.</p>
+      <div class="hero-buttons reveal">
+        <a href="#portfolio" class="btn btn-primary">View Our Portfolio <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="reveal">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Our Work</span>
+      <h2 class="section-title">Visual Masterpieces</h2>
+    </div>
+    
+    <div class="portfolio-filter-container">
+      <button class="filter-btn active" data-filter="all">All Media</button>
+      <button class="filter-btn" data-filter="photography">Photography</button>
+      <button class="filter-btn" data-filter="videography">Videography (Reels)</button>
+    </div>
+    
+    <div class="portfolio-grid">
+      <!-- Portfolio Item 1 (Photography) -->
+      <div class="portfolio-item" data-type="photography">
+        <div class="portfolio-img-wrapper">
+          <img src="assets/portfolio-1.jpg" alt="Close-up gourmet Michelin star plate design" class="portfolio-img">
+        </div>
+        <div class="portfolio-overlay">
+          <span class="portfolio-category">Photography</span>
+          <h3 class="portfolio-title">The Art of Plating</h3>
+          <p class="portfolio-desc">Fine dining composition accentuating color contrasts and micro-textures.</p>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 2 (Videography) -->
+      <div class="portfolio-item video-item" data-type="videography" data-video="https://www.w3schools.com/html/mov_bbb.mp4">
+        <div class="portfolio-img-wrapper">
+          <img src="assets/portfolio-2.jpg" alt="Chef preparing food with wok fire action" class="portfolio-img">
+        </div>
+        <div class="play-btn-overlay">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="portfolio-overlay">
+          <span class="portfolio-category">Videography</span>
+          <h3 class="portfolio-title">Flames & Flavors</h3>
+          <p class="portfolio-desc">High-speed motion capture showcasing culinary fire artistry.</p>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 3 (Photography) -->
+      <div class="portfolio-item" data-type="photography">
+        <div class="portfolio-img-wrapper">
+          <img src="assets/portfolio-3.jpg" alt="Bartender pouring artisanal cocktail splash details" class="portfolio-img">
+        </div>
+        <div class="portfolio-overlay">
+          <span class="portfolio-category">Photography</span>
+          <h3 class="portfolio-title">Liquid Motion</h3>
+          <p class="portfolio-desc">High-shutter liquid captures highlighting drink clarity and ice refraction.</p>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 4 (Photography) -->
+      <div class="portfolio-item" data-type="photography">
+        <div class="portfolio-img-wrapper">
+          <img src="assets/portfolio-4.jpg" alt="Gourmet wood fired pizza slice detail" class="portfolio-img">
+        </div>
+        <div class="portfolio-overlay">
+          <span class="portfolio-category">Photography</span>
+          <h3 class="portfolio-title">Rustic Hearth</h3>
+          <p class="portfolio-desc">Glow shots emphasizing textured wood-oven crusts and bubbling cheese.</p>
+        </div>
+      </div>
+      
+      <!-- Portfolio Item 5 (Videography) -->
+      <div class="portfolio-item video-item" data-type="videography" data-video="https://www.w3schools.com/html/movie.mp4">
+        <div class="portfolio-img-wrapper">
+          <img src="assets/portfolio-5.jpg" alt="Pastry chef drizzle sauce chocolate dessert" class="portfolio-img">
+        </div>
+        <div class="play-btn-overlay">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="portfolio-overlay">
+          <span class="portfolio-category">Videography</span>
+          <h3 class="portfolio-title">Sweet Symphony</h3>
+          <p class="portfolio-desc">Slow-motion captures of exquisite dessert garnishing sequences.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process / How We Work Section -->
+  <section id="process" class="reveal">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">How We Work</span>
+      <h2 class="section-title">The Forgex Formula</h2>
+    </div>
+    
+    <div class="process-timeline">
+      <!-- Step 1 -->
+      <div class="process-step">
+        <div class="process-content">
+          <div class="process-num">01</div>
+          <h3>Creative Storyboarding</h3>
+          <p>We work with your culinary team to align on your brand identity. We craft visual mood boards, custom lighting maps, and plate style guidelines prior to production day.</p>
+        </div>
+        <div class="process-badge">1</div>
+        <div class="process-visual">
+          <img src="assets/portfolio-1.jpg" alt="Styling storyboard plate composition">
+        </div>
+      </div>
+      
+      <!-- Step 2 -->
+      <div class="process-step">
+        <div class="process-content">
+          <div class="process-num">02</div>
+          <h3>Styling & Setting</h3>
+          <p>We sculpt scenes using atmospheric lighting profiles (chiaroscuro, bright airy, or neon-cocktail tones). We styles plates, mist ingredients, and craft micro-smoke vectors for ultimate visual texture.</p>
+        </div>
+        <div class="process-badge">2</div>
+        <div class="process-visual">
+          <img src="assets/portfolio-3.jpg" alt="Setting lights and pouring techniques">
+        </div>
+      </div>
+      
+      <!-- Step 3 -->
+      <div class="process-step">
+        <div class="process-content">
+          <div class="process-num">03</div>
+          <h3>Dynamic Shooting</h3>
+          <p>Using ultra-high-resolution rigs, stabilizers, and high-speed focal lengths, we capture both macro details and wide room vibes. We catch chefs in action and the splash of fresh pours.</p>
+        </div>
+        <div class="process-badge">3</div>
+        <div class="process-visual">
+          <img src="assets/portfolio-2.jpg" alt="Cooking shooting action shot">
+        </div>
+      </div>
+      
+      <!-- Step 4 -->
+      <div class="process-step">
+        <div class="process-content">
+          <div class="process-num">04</div>
+          <h3>Cinematic Edit</h3>
+          <p>Every frame is polished. We apply tailored gourmet color-grades, motion stabilization, precise sound design, and custom dimensions optimized for websites, print menus, or TikTok and Reels.</p>
+        </div>
+        <div class="process-badge">4</div>
+        <div class="process-visual">
+          <img src="assets/portfolio-5.jpg" alt="Post-production coloring fine dessert">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Location Section -->
+  <section id="contact" class="reveal">
+    <div class="contact-info">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Connect With Us</span>
+        <h2 class="section-title">Let's Tell Your Story</h2>
+      </div>
+      <p>Whether you're a cozy bistro, a premium fine-dining hall, or a beverage startup, Forgex Media brings your plates and space to life. Visit our studio or write us to discuss your upcoming media campaign.</p>
+      
+      <div class="info-cards">
+        <div class="info-card">
+          <h4><i class="fa-solid fa-location-dot"></i> Our Studio</h4>
+          <p>42 Culinary Boulevard, Suite 100, San Francisco, CA 94103</p>
+        </div>
+        <div class="info-card">
+          <h4><i class="fa-solid fa-envelope"></i> Email Us</h4>
+          <a href="mailto:hello@forgexmedia.com">hello@forgexmedia.com</a>
+        </div>
+        <div class="info-card">
+          <h4><i class="fa-solid fa-phone"></i> Direct Line</h4>
+          <a href="tel:+14155558900">+1 (415) 555-8900</a>
+        </div>
+        <div class="info-card">
+          <h4><i class="fa-solid fa-clock"></i> Hours</h4>
+          <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+
+      <!-- Live-styled Map Block -->
+      <div class="map-placeholder">
+        <div class="map-visual"></div>
+        <div class="map-marker">
+          <div class="map-marker-pin"></div>
+          <h5>FORGEX HQ</h5>
+        </div>
+      </div>
+    </div>
+    
+    <div class="contact-form-wrapper">
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" id="name" required placeholder=" ">
+          <label for="name">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" required placeholder=" ">
+          <label for="email">Email Address</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="restaurant" required placeholder=" ">
+          <label for="restaurant">Restaurant Name</label>
+        </div>
+        <div class="form-group">
+          <select id="project-type" required>
+            <option value="" disabled selected hidden></option>
+            <option value="photography">Food & Space Photography</option>
+            <option value="videography">Social Media Reels & Videography</option>
+            <option value="full-campaign">Full Production Campaign</option>
+          </select>
+          <label for="project-type">Project Scope</label>
+        </div>
+        <div class="form-group">
+          <textarea id="message" rows="5" required placeholder=" "></textarea>
+          <label for="message">Tell us about your brand vision...</label>
+        </div>
+        <button type="submit" class="form-submit-btn">Send Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <a href="#" class="footer-brand">FORGEX<span>MEDIA</span></a>
+      <p>Elevating restaurant brands through premium visual campaigns. Crafted with passion, shot with precision.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="social-link" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" class="social-link" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+        <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 Forgex Media. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Popup Modal -->
+  <div class="lightbox">
+    <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <div class="lightbox-content">
+      <!-- Media dynamically loaded here -->
+    </div>
+  </div>
+
+  <!-- GSAP Animation Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Main Script -->
+  <script src="app.js"></script>
+</body>
+</html>
