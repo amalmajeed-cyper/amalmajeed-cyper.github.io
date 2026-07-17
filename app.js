@@ -276,18 +276,21 @@ function initScrollAnimations() {
     });
   });
   
-  // 4. Portfolio Grid Entrance
-  gsap.from('.portfolio-item', {
-    scrollTrigger: {
-      trigger: '.portfolio-grid',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    y: 60,
-    opacity: 0,
-    duration: 1.2,
-    stagger: 0.1,
-    ease: 'power3.out'
+  // 4. Portfolio Grid Entrance (individual card triggers to prevent layout shift errors)
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  portfolioItems.forEach(item => {
+    gsap.from(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 90%',
+        toggleActions: 'play none none none',
+        invalidateOnRefresh: true
+      },
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
   });
   
   // 5. Process Step Animations (Timeline)
@@ -587,3 +590,10 @@ function initBurgerScroll() {
     });
   }
 }
+
+// Refresh all GSAP ScrollTriggers when all page assets (images/styles) finish loading
+window.addEventListener('load', () => {
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.refresh();
+  }
+});
