@@ -70,38 +70,50 @@ body {
 /* --- CUSTOM CURSOR --- */
 .custom-cursor-dot,
 .custom-cursor-outline {
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease, opacity 0.3s ease;
+  display: none; /* Hide on mobile/tablet */
 }
 
-.custom-cursor-outline {
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: 1px solid rgba(var(--accent-rgb), 0.5);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+/* Custom cursor only visible on desktop */
+@media (min-width: 1024px) {
+  .custom-cursor-dot,
+  .custom-cursor-outline {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, opacity 0.3s ease;
+  }
+
+  .custom-cursor-outline {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  }
+
+  /* Cursor hover states */
+  .cursor-hover .custom-cursor-outline {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(var(--accent-rgb), 0.08);
+    border-color: var(--accent);
+  }
+  .cursor-hover .custom-cursor-dot {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  
+  body, a, button, input, textarea, select, [role="button"] {
+    cursor: none;
+  }
 }
 
-/* Cursor hover states */
-.cursor-hover .custom-cursor-outline {
-  transform: translate(-50%, -50%) scale(1.5);
-  background-color: rgba(var(--accent-rgb), 0.08);
-  border-color: var(--accent);
-}
-.cursor-hover .custom-cursor-dot {
-  transform: translate(-50%, -50%) scale(0.5);
-}
-
-/* Hide default cursor on desktop */
 @media (min-width: 1024px) {
   body, a, button, input, textarea, select, [role="button"] {
     cursor: none;
@@ -1076,12 +1088,48 @@ section {
 }
 
 @media (max-width: 768px) {
-  .nav-links, .nav-cta {
-    display: none; /* Mobile menu can toggle in JS */
+  .nav-cta {
+    display: none;
+  }
+  
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(10, 12, 14, 0.96);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    padding: 6rem 2rem 2rem;
+    gap: 2.5rem;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  }
+  
+  .nav-links.active {
+    right: 0;
+  }
+  
+  .nav-links a {
+    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 700;
   }
   
   .mobile-menu-btn {
     display: block;
+    position: relative;
+    z-index: 1000;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.6rem;
   }
   
   .hero {

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioFilter();
   initLightbox();
   initContactForm();
+  initMobileMenu();
   
   // Wait for GSAP and ScrollTrigger to load via CDN before running scroll animations
   if (typeof gsap !== 'undefined') {
@@ -589,6 +590,38 @@ function initBurgerScroll() {
       lastRenderedFrame = index;
     });
   }
+}
+
+function initMobileMenu() {
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!menuBtn || !navLinks) return;
+  
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    // Toggle icon between hamburger and close cross
+    const icon = menuBtn.querySelector('i');
+    if (icon) {
+      if (icon.classList.contains('fa-bars-staggered')) {
+        icon.className = 'fa-solid fa-xmark';
+      } else {
+        icon.className = 'fa-solid fa-bars-staggered';
+      }
+    }
+  });
+  
+  // Close menu drawer when any link is clicked
+  const links = navLinks.querySelectorAll('a');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      const icon = menuBtn.querySelector('i');
+      if (icon) {
+        icon.className = 'fa-solid fa-bars-staggered';
+      }
+    });
+  });
 }
 
 // Refresh all GSAP ScrollTriggers when all page assets (images/styles) finish loading
