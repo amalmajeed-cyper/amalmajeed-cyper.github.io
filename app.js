@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Wait for GSAP and ScrollTrigger to load via CDN before running scroll animations
   if (typeof gsap !== 'undefined') {
     initScrollAnimations();
+    initBurgerScroll();
   } else {
     document.body.classList.add('no-gsap');
     // Fallback simple reveal class toggler using IntersectionObserver if CDN is blocked
@@ -439,4 +440,141 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.innerText = text;
   return div.innerHTML;
+}
+
+/* --- BURGER SCROLL ANIMATION --- */
+let burgerImages = [];
+let lastRenderedFrame = -1;
+
+function initBurgerScroll() {
+  const canvas = document.getElementById('burger-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const frameCount = 240;
+  let loadedCount = 0;
+  const loader = document.querySelector('.burger-loader');
+  const loaderText = document.querySelector('.burger-loader-text');
+
+  // Preload sequence
+  for (let i = 1; i <= frameCount; i++) {
+    const img = new Image();
+    const paddedIndex = String(i).padStart(5, '0');
+    img.src = `assets/burger animation/${paddedIndex}.jpg`;
+    img.onload = () => {
+      loadedCount++;
+      if (loaderText) {
+        loaderText.innerText = `Preparing burger experience... (${Math.round((loadedCount / frameCount) * 100)}%)`;
+      }
+      if (loadedCount === frameCount) {
+        startBurgerAnimation();
+      }
+    };
+    img.onerror = () => {
+      loadedCount++;
+      if (loadedCount === frameCount) {
+        startBurgerAnimation();
+      }
+    };
+    burgerImages.push(img);
+  }
+
+  function startBurgerAnimation() {
+    // Hide loader
+    if (loader) {
+      loader.classList.add('hidden');
+    }
+
+    // Set initial size
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Initial render of first frame
+    renderFrame(0);
+
+    // GSAP ScrollTrigger timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#process',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.1, // Slight smoothing
+        pin: '.burger-sticky-container',
+        invalidateOnRefresh: true
+      }
+    });
+
+    // Frame interpolation object
+    const animationTarget = { frame: 0 };
+
+    tl.to(animationTarget, {
+      frame: frameCount - 1,
+      ease: 'none',
+      onUpdate: () => {
+        const frameIndex = Math.round(animationTarget.frame);
+        renderFrame(frameIndex);
+      }
+    });
+
+    // Text Overlays Animations sync
+    // Set initial overlay states
+    gsap.set('.burger-text-overlay', { opacity: 0, y: 20 });
+    gsap.set('.burger-text-overlay.overlay-0', { opacity: 1, y: 0 }); // Initial active
+
+    // Sync texts to scroll progress
+    tl.to('.burger-text-overlay.overlay-0', { opacity: 0, y: -20, duration: 0.1 }, 0.05)
+      .to('.burger-text-overlay.overlay-25', { opacity: 1, y: 0, duration: 0.15 }, 0.18)
+      .to('.burger-text-overlay.overlay-25', { opacity: 0, y: -20, duration: 0.15 }, 0.45)
+      .to('.burger-text-overlay.overlay-60', { opacity: 1, y: 0, duration: 0.15 }, 0.52)
+      .to('.burger-text-overlay.overlay-60', { opacity: 0, y: -20, duration: 0.15 }, 0.78)
+      .to('.burger-text-overlay.overlay-90', { opacity: 1, y: 0, duration: 0.15 }, 0.85);
+  }
+
+  function resizeCanvas() {
+    const width = canvas.parentElement.clientWidth;
+    const height = canvas.parentElement.clientHeight;
+
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+
+    const scale = window.devicePixelRatio || 1;
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+
+    ctx.scale(scale, scale);
+
+    if (lastRenderedFrame >= 0) {
+      renderFrame(lastRenderedFrame);
+    }
+  }
+
+  function renderFrame(index) {
+    if (index === lastRenderedFrame) return; // Prevent redundant redraws
+    const img = burgerImages[index];
+    if (!img || !img.complete) return;
+
+    requestAnimationFrame(() => {
+      const w = parseFloat(canvas.style.width) || canvas.width;
+      const h = parseFloat(canvas.style.height) || canvas.height;
+
+      // Draw with contain fit
+      const iw = img.width;
+      const ih = img.height;
+      const r = Math.min(w / iw, h / ih);
+      
+      const nw = iw * r;
+      const nh = ih * r;
+      
+      const cx = (w - nw) * 0.5;
+      const cy = (h - nh) * 0.5;
+
+      // Clear/fill canvas background
+      ctx.fillStyle = '#070b0c';
+      ctx.fillRect(0, 0, w, h);
+
+      // Render frame
+      ctx.drawImage(img, cx, cy, nw, nh);
+      lastRenderedFrame = index;
+    });
+  }
 }
